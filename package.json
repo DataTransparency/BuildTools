@@ -1,0 +1,14 @@
+{
+  "name": "classfitter-tools",
+  "version": "1.0.0",
+  "description": "Tools for managing classfitter",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "github": "^2.5.1"
+  }
+}
