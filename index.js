@@ -17,8 +17,8 @@ var github = new GitHubApi({
 
 github.authenticate({
     type: "basic",
-    username: 'jamesjwood',
-    password: 'nX5-99D-ovn-cUX'
+    username: process.env.GITHUB_USERNAME,
+    password: process.env.GITHUB_PASSWORD
 });
 
 var branchName = 'issue-3-update-coding-style';
