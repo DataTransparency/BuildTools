@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "Tools for managing classfitter",
   "main": "index.js",
-  "scripts": {
-  },
-  "author": "",
+  "scripts": {},
+  "author": "James Wood",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.4.1",
     "github": "^2.5.1"
+  },
+  "bin": {
+    "cftool": "index.js"
   }
 }
