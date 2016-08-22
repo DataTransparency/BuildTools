@@ -8,7 +8,7 @@ var github = new GitHubApi({
     protocol: "https",
     host: "api.github.com",
     headers: {
-        "user-agent": "James Wood" // GitHub is happy with a unique user agent
+        "user-agent": "Classfitter" // GitHub is happy with a unique user agent
     },
     Promise: bluebird,
     followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
@@ -16,9 +16,8 @@ var github = new GitHubApi({
 });
 
 github.authenticate({
-    type: "basic",
-    username: process.env.GITHUB_USERNAME,
-    password: process.env.GITHUB_PASSWORD
+    type: "oauth",
+    token: process.env.GITHUB_TOKEN
 });
 
 var branchName = 'issue-3-update-coding-style';

@@ -17,26 +17,27 @@ var github = new GitHubApi({
 });
 
 github.authenticate({
-    type: "basic",
-    username: process.env.GITHUB_USERNAME,
-    password: process.env.GITHUB_PASSWORD
+    type: "oauth",
+    token: process.env.GITHUB_TOKEN
 });
 
-var branchName = 'issue-3-update-coding-style';
+
 
 var usr = 'classfitter';
 var repo = "classfitter";
-
-var STATE_PENDING='pending';
+var branchName = 'issue-3-update-coding-style';
+var version = 'v0.0.1-test';
+var required_contexts=['test']
+var environment='test'
 
 return github.repos.createDeployment({
 		user:usr,
 		repo:repo,
 		ref:branchName,
-		required_contexts:['test'],
-		payload:JSON.stringify({version:'v0.0.1-test'}),
-		environment:'test',
-		description:'Deployment to test requested'
+		required_contexts: required_contexts,
+		payload:JSON.stringify({version: version}),
+		environment: environment,
+		description:`Deployment of ${version} to ${environment} from ${branchName}`
 }).then(function(){
  	return github.repos.getDeployments({
 		user:'Classfitter',
