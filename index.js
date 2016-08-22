@@ -1,14 +1,7 @@
 #! /usr/bin/env node
 
-
-
-var path = '';
-if (process.env.WORKSPACE){
-	path = process.env.WORKSPACE + "/node_modules/";
-}
-
-var bluebird = require(path + "bluebird");
-var GitHubApi = require(path+ "github");
+var bluebird = require("bluebird");
+var GitHubApi = require("github");
 
 
 var github = new GitHubApi({
