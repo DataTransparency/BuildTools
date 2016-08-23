@@ -31,6 +31,8 @@ export default function readTestResultsFromFile(path: String){
 	}
 	catch (err)
 	{
+		console.log('error reading results');
+		console.error(err);
 		unitTestDescription = "error reading results: " + err.message;
 		unitTestResult = 'error';
 	}

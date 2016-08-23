@@ -22,7 +22,7 @@ var gitHub = new GitHubApi({
 });
 
 gitHub.authenticate({
-    type: "oauth",
+    type: "token",
     token: process.env.GITHUB_TOKEN
 });
 

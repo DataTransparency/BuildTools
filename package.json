@@ -1,10 +1,10 @@
 {
   "name": "classfitter-tools",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Tools for managing classfitter",
   "main": "lib/index.js",
   "scripts": {
-      "install": ""
+    "install": ""
   },
   "author": "James Wood",
   "license": "ISC",
@@ -18,6 +18,7 @@
     "cftool": "lib/index.js"
   },
   "devDependencies": {
+    "tslint": "^3.15.1",
     "typescript": "^1.8.10"
   },
   "typings": "lib/index.d.ts",
