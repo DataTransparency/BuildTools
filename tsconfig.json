@@ -5,7 +5,8 @@
         "sourceMap": true,
         "declaration": true,
         "module": "commonjs",
-        "removeComments": false
+        "removeComments": false,
+        "watch": true
     },
     "exclude": [
         "node_modules",
