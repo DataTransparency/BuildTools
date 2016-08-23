@@ -26,7 +26,7 @@ var me = {
 	github:github,
 	reqire: function(req){return require(path + req)},
 	setStatus: require('./setStatus.js'),
-	setUnitTestResultsFromFile: require('./setUnitTestResultsFromFile.js'),
+	setGitHubUnitTestResultsFromFile: require('./setGitHubUnitTestResultsFromFile.js'),
 	readTestResults: require('./readTestResults.js'),
 	setGitHubCoverageStatusFromFile: require('./setGitHubCoverageStatusFromFile.js'),
 }

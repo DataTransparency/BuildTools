@@ -1,8 +1,7 @@
-module.exports = function setUnitTestResultsFromFile(user, repo, revision, fileName, url){
+module.exports = function setGitHubUnitTestResultsFromFile(user, repo, revision, fileName, context, url){
 		
 		var results = this.readTestResults(fileName);
 
-		var context = 'unit tests';
 		url = url || process.env.BUILD_URL;
 
 		var state = results.result;
