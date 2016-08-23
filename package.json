@@ -1,6 +1,6 @@
 {
   "name": "classfitter-tools",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Tools for managing classfitter",
   "main": "index.js",
   "scripts": {},
@@ -8,7 +8,9 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.4.1",
-    "github": "^2.5.1"
+    "github": "^2.5.1",
+    "xmldom": "^0.1.22",
+    "xpath": "0.0.23"
   },
   "bin": {
     "cftool": "index.js"
