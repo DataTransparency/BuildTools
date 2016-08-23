@@ -1,15 +1,14 @@
-var xpath = require('xpath');
-var parser = require('xmldom').DOMParser;
+import xpath = require("xpath");
+import xmlDom = require("xmldom");
+var parser = xmlDom.DOMParser;
 var fs = require('fs');
 
-
-
-module.exports = function readTestResults(){
+export default function readTestResultsFromFile(path: String){
 	var unitTestResult;
 	var unitTestDescription;
 	try
 	{
-		var fileData = fs.readFileSync('test.xml', 'ascii');
+		var fileData = fs.readFileSync(path, 'ascii');
 		var doc = new parser().parseFromString(fileData.substring(2, fileData.length));
 
 
@@ -32,7 +31,7 @@ module.exports = function readTestResults(){
 	}
 	catch (err)
 	{
-		unitTestDescription = "error reading results";
+		unitTestDescription = "error reading results: " + err.message;
 		unitTestResult = 'error';
 	}
 
