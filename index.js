@@ -28,7 +28,7 @@ var me = {
 	setStatus: require('./setStatus.js'),
 	setUnitTestResultsFromFile: require('./setUnitTestResultsFromFile.js'),
 	readTestResults: require('./readTestResults.js'),
-	setGitHubCoveraveStatusFromFile: equire('./setGitHubCoveraveStatusFromFile.js'),
+	setGitHubCoverageStatusFromFile: require('./setGitHubCoverageStatusFromFile.js'),
 }
 
 module.exports = me;
