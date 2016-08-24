@@ -1,0 +1,11 @@
+{
+  "name": "classfitter-tools",
+  "globalDependencies": {
+    "node": "registry:env/node#6.0.0+20160824014937",
+    "xmldom": "registry:dt/xmldom#0.1.22+20160319053438",
+    "xpath": "registry:dt/xpath#0.0.7+20160316155526"
+  },
+  "dependencies": {
+    "bluebird": "registry:npm/bluebird#3.4.1+20160811213708"
+  }
+}

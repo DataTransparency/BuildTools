@@ -9,10 +9,10 @@ var github = new GitHubApi({
     protocol: "https",
     host: "api.github.com",
     headers: {
-        "user-agent": "James Wood" // GitHub is happy with a unique user agent
+        "user-agent": "James Wood"
     },
     Promise: bluebird,
-    followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+    followRedirects: false,
     timeout: 5000
 });
 
