@@ -3,6 +3,11 @@ import setGitHubStatusFromTestResutsFile from "./setGitHubStatusFromTestResutsFi
 import readTestResultsFromFile from "./readTestResultsFromFile";
 import setGitHubStatus from "./setGitHubStatus";
 import setGitHubDeploymentStatusWthPayload from "./setGitHubDeploymentStatusWthPayload";
+import "reflect-metadata";
+
+
+import kernel = from "./inversify.run.config";
+
 
 export class Main {
    constructor(public setGitHubStatus: Function, public setGitHubStatusFromTestResutsFile: Function, 

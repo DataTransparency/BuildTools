@@ -1,6 +1,11 @@
-import setGutHubDeploymentStatus  from "./setGitHubDeploymentStatus";
+/// <reference path="../typings/globals/inversify/index.d.ts" />
+import { injectable, inject } from "inversify"
+import "reflect-metadata";
+import TYPES from "./types";
 
-export default function setGitHubDeploymentStatusWthPayload(payloadString: string, state: string, description: string){
+let mySetGitHubDeploymentStatusWthPayload: ISetGitHubDeploymentStatusWthPayload;
+
+mySetGitHubDeploymentStatusWthPayload = function(payloadString: string, state: string, description: string){
     let payload: GitHubDeployment.Payload = JSON.parse(process.env.payload);
     let deployment = payload.deployment;
     let repository = payload.repository;
@@ -8,6 +13,9 @@ export default function setGitHubDeploymentStatusWthPayload(payloadString: strin
         + " into " + payload.deployment.environment + " environment for " + deployment.creator.login);
     return setGutHubDeploymentStatus(repository.owner.login, repository.name, deployment.id, state, description);
 }
+
+export default mySetGitHubDeploymentStatusWthPayload;
+
 declare module GitHubDeployment {
 
     export interface Creator {

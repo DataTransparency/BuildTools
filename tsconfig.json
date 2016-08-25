@@ -11,7 +11,9 @@
         "module": "commonjs",
         "newLine": "LF",
         "removeComments": false,
-        "watch": true
+        "watch": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     },
     "exclude": [
         "node_modules",
