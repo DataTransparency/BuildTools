@@ -1,34 +1,28 @@
-let GitHubApi = require("github");
-import bluebird = require("bluebird");
+import {ISetGitHubDeploymentStatus, IGitHubAPI} from "./types";
+import TYPES from "./types";
+import {injectable, inject} from "inversify";
 
+let statuses = ["pending", "success", "failure", "error"];
 
+@injectable()
+class SetGitHubDeploymentStatus implements ISetGitHubDeploymentStatus {
 
-let statuses = ["pending", "success", "failure","error"]
-
-export default function setGitHubDeploymentStatus(user: string, repo: string, deploymentId: number, state: string, description: string) {
-    if (!statuses[state]) {
-        throw new Error("Invalid State: " + state);
+    private _myAPI: IGitHubAPI;
+    public constructor(@inject(TYPES.iGitHubAPI) myAPI: IGitHubAPI){
+        this._myAPI = myAPI;
     }
-    let gitHub = new GitHubApi({
-        Promise: bluebird,
-        debug: true,
-        followRedirects: false,
-        headers: {
-            "user-agent": user,
-        },
-        host: "api.github.com",
-        protocol: "https",
-        timeout: 5000,
-    });
-    gitHub.authenticate({
-        token: process.env.GITHUB_TOKEN,
-        type: "token",
-    });
-    return gitHub.repos.createDeploymentStatus({
-        user: user,
-        repo: repo,
-        id: deploymentId,
-        state: state,
-        description: description
-    })
+    public execute(user: string, repo: string, id: number, state: string, description: string) {
+        if (statuses.indexOf(state)<0) {
+            throw new Error("Invalid State: " + state);
+        }
+        return this._myAPI.repos.createDeploymentStatus({
+            user: user,
+            repo: repo,
+            id: id,
+            state: state,
+            description: description
+        })
+    }
 }
+
+export {SetGitHubDeploymentStatus};

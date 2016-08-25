@@ -1,5 +1,6 @@
 import cftool from "./index";
 import readTestResultsFromFile from "./readTestResultsFromFile";
+import setGitHubStatus from "./setGitHubStatus";
 
 export default function setGitHubStatusFromTestResutsFile(user: String,
 repo: String, revision: String, fileName: String, context: String, url: String) {
@@ -8,6 +9,6 @@ repo: String, revision: String, fileName: String, context: String, url: String) 
             url = url || process.env.BUILD_URL;
             let state = results.result;
             let description = results.description;
-            return cftool.setGitHubStatus(user, repo, revision, context, state, description, url);
+            return setGitHubStatus(user, repo, revision, context, state, description, url);
         });
 }

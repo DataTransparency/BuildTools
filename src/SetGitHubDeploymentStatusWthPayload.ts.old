@@ -1,0 +1,25 @@
+/// <reference path="../node_modules/inversify-dts/inversify/inversify.d.ts" />
+/// <reference path="types.ts" />
+
+import {ISetGitHubDeploymentStatusWthPayload, ISetGitHubDeploymentStatus, GitHubDeploymentStatusAPI} from "./types";
+import TYPES from "./types";
+
+import inversify = require("inversify");
+
+declare var kernel: inversify.interfaces.Kernel;
+declare var process;
+
+/*
+let SetGitHubDeploymentStatusWthPayload: ISetGitHubDeploymentStatusWthPayload =
+    function (payloadString: string, state: string, description: string){
+    let payload: GitHubDeploymentStatusAPI.Payload = JSON.parse(process.env.payload);
+    let deployment = payload.deployment;
+    let repository = payload.repository;
+    console.log("Deploying " + deployment.sha + " from " + payload.deployment.ref
+        + " into " + payload.deployment.environment + " environment for " + deployment.creator.login);
+    let setGitHubDeploymentStatus = kernel.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
+    return setGitHubDeploymentStatus(repository.owner.login, repository.name, deployment.id, state, description);
+};
+
+export default SetGitHubDeploymentStatusWthPayload;
+*/

@@ -7,7 +7,7 @@
         "sourceMap": true,
         "inlineSources": true,
         "declaration": true,
-        "moduleResolution": "node",
+        "moduleResolution": "classic",
         "module": "commonjs",
         "newLine": "LF",
         "removeComments": false,
@@ -19,10 +19,12 @@
         "node_modules",
         "test",
         "lib",
-        ".build"
+        ".build",
+        "typings/globals/inversify/index.d.ts"
     ],
     "files": [
-        "typings/index.d.ts",
-        "src/index.ts"
+        "src/index.ts",
+        "src/tests/index.ts",
+        "typings/index.d.ts"
     ]
 }

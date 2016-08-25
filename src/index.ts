@@ -1,22 +1,21 @@
 #! /usr/bin/env node
+import setGitHubStatus from "./setGitHubStatus";
 import setGitHubStatusFromTestResutsFile from "./setGitHubStatusFromTestResutsFile";
 import readTestResultsFromFile from "./readTestResultsFromFile";
-import setGitHubStatus from "./setGitHubStatus";
-import setGitHubDeploymentStatusWthPayload from "./setGitHubDeploymentStatusWthPayload";
+
+import {ISetGitHubDeploymentStatus} from "./types";
+
+import TYPES from "./types";
+declare var process;
+
 import "reflect-metadata";
+import k from "./inversify.run.config";
 
-
-import kernel = from "./inversify.run.config";
-
-
-export class Main {
-   constructor(public setGitHubStatus: Function, public setGitHubStatusFromTestResutsFile: Function, 
-   public readTestResultsFromFile: Function, public setGitHubDeploymentStatusWthPayload: Function)
-   {}
+let me = {
+    "SetGitHubDeploymentStatus": k.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus).execute,
 }
-
-let me = new Main(setGitHubStatus, setGitHubStatusFromTestResutsFile, readTestResultsFromFile, setGitHubDeploymentStatusWthPayload);
 export default me;
 let command = process.argv[2];
 let newArgs = process.argv.slice(3);
+
 me[command].apply(me, newArgs);
