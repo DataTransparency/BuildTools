@@ -14,8 +14,10 @@
   "author": "James Wood",
   "license": "ISC",
   "dependencies": {
+    "commander": "^2.9.0",
     "github": "^2.5.1",
     "inversify": "^2.0.0-rc.11",
+    "pjson": "^1.0.7",
     "reflect-metadata": "^0.1.8",
     "xmldom": "^0.1.22",
     "xpath": "0.0.23"

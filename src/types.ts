@@ -6,10 +6,14 @@ export interface IGitHubAPI{
     repos: IRepos;
 }
 
-
-export interface IReadTestResultsFromFile{
-    execute(path: String)
+export interface ITestResult {
+    result: string,
+    description: string,
 }
+export interface IReadTestResultsFromFile{
+    execute(path: String): Promise<ITestResult>;
+}
+
 export interface ISetGitHubDeploymentStatusWthPayload{
     execute(payloadstring: string, state: string, description: string)
 }
