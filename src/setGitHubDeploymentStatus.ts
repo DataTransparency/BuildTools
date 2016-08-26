@@ -2,11 +2,10 @@ import {ISetGitHubDeploymentStatus, IGitHubAPI} from "./types";
 import TYPES from "./types";
 import {injectable, inject} from "inversify";
 
-let statuses = ["pending", "success", "failure", "error"];
+let statuses: Array<string> = ["pending", "success", "failure", "error"];
 
 @injectable()
 class SetGitHubDeploymentStatus implements ISetGitHubDeploymentStatus {
-
     private _myAPI: IGitHubAPI;
     public constructor(@inject(TYPES.iGitHubAPI) myAPI: IGitHubAPI){
         this._myAPI = myAPI;
@@ -25,4 +24,4 @@ class SetGitHubDeploymentStatus implements ISetGitHubDeploymentStatus {
     }
 }
 
-export {SetGitHubDeploymentStatus};
+export default SetGitHubDeploymentStatus;

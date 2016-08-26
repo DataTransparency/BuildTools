@@ -5,12 +5,11 @@ let fs = require("fs");
 /// <reference path="node_modules/inversify-dts/inversify/inversify.d.ts" />
 
 
-import {SetGitHubDeploymentStatus} from "../SetGitHubDeploymentStatus";
+import SetGitHubDeploymentStatus from "../SetGitHubDeploymentStatus";
 declare var done;
 import { Kernel, interfaces } from "inversify";
 
 var kernel = new Kernel();
-
 
 import {ISetGitHubDeploymentStatus, IGitHubAPI} from "../types";
 import TYPES from "../types";
@@ -23,13 +22,12 @@ let ID = 4534543;
 let STATE = "pending";
 let DESCRIPTION = "description";
 
-
-
 describe("SetGitHubDeploymentStatus", function () {
     it("Should pass correct arguments", function () {
         let called: Boolean = false;
         let myFakeAPI = {
             "repos": {
+                "createStatus": function(requestArg){},
                 "createDeploymentStatus": function (requestArg) {
                     assert.equal(requestArg.user, USER);
                     assert.equal(requestArg.repo, REPO);
@@ -54,17 +52,19 @@ describe("SetGitHubDeploymentStatus", function () {
     });
 
     it("Should reject invalid statuses", function (done) {
-        let setGitHubDeploymentStatus = kernel.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
         let myFakeAPI = {
             "repos": {
+                "createStatus": function(requestArg){},
                 "createDeploymentStatus": function (requestArg) {}
-            }
+            },
         };
 
         kernel.bind<IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
+        let setGitHubDeploymentStatus = kernel.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
         assert.throws(function () {
-            return setGitHubDeploymentStatus.execute(USER, REPO, ID, 'rubish', DESCRIPTION);
+            setGitHubDeploymentStatus.execute(USER, REPO, ID, "rubish", DESCRIPTION);
         });
         kernel.unbind(TYPES.iGitHubAPI);
+        done();
     });
 })

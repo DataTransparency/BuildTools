@@ -11,7 +11,7 @@
         "module": "commonjs",
         "newLine": "LF",
         "removeComments": false,
-        "watch": true,
+        "watch": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
     },

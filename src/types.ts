@@ -1,29 +1,35 @@
-
-
-
-export interface IRepos
-{
+export interface IRepos{
     createDeploymentStatus: (any);
+    createStatus:(any);
 }
-export interface IGitHubAPI
-{
+export interface IGitHubAPI{
     repos: IRepos;
 }
 
-export interface ISetGitHubDeploymentStatusWthPayload{
-   execute(payloadString: string, state: string, description: string)
+
+export interface IReadTestResultsFromFile{
+    execute(path: String)
 }
-
-
+export interface ISetGitHubDeploymentStatusWthPayload{
+    execute(payloadstring: string, state: string, description: string)
+}
 export interface ISetGitHubDeploymentStatus{
     execute(user: string, repo: string, deploymentId: number, state: string, description: string)
 }
-
+export interface ISetGitHubStatus{
+    execute(user: string, repo: string, commit: string, context: string, state: string, description: string, url: string)
+}
+export interface ISetGitHubStatusFromTestResutsFile{
+    execute(user: String, repo: String, revision: String, fileName: String, context: String, url: String)
+}
 
 let TYPES = {
     iGitHubAPI: Symbol("IGitHubAPI"),
     iSetGitHubDeploymentStatus: Symbol("ISetGitHubDeploymentStatus"),
     iSetGitHubDeploymentStatusWthPayload: Symbol("ISetGitHubDeploymentStatusWthPayload"),
+    iSetGitHubStatus: Symbol("ISetGitHubStatus"),
+    iSetGitHubStatusFromTestResutsFile: Symbol("ISetGitHubStatusFromTestResutsFile"),
+    iReadTestResultsFromFile: Symbol("IReadTestResultsFromFile"),
 }
 
 export default TYPES;

@@ -1,4 +1,7 @@
 import "reflect-metadata";
 
-import SetGitHubDeploymentStatus from "./SetGitHubDeploymentStatus";
-export SetGitHubDeploymentStatus;
+import SetGitHubDeploymentStatus = require("./SetGitHubDeploymentStatus");
+import SetGitHubDeploymentStatusWithPayload = require("./SetGitHubDeploymentStatusWthPayload");
+import SetGitHubStatus = require("./SetGitHubStatus");
+
+export {SetGitHubDeploymentStatus, SetGitHubDeploymentStatusWithPayload, SetGitHubStatus}

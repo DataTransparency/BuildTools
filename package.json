@@ -8,12 +8,12 @@
   },
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
-    "install": "typings install"
+    "install": "typings install",
+    "test": "tsc; node_modules/mocha/bin/mocha lib/tests/index.js"
   },
   "author": "James Wood",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.4.1",
     "github": "^2.5.1",
     "inversify": "^2.0.0-rc.11",
     "reflect-metadata": "^0.1.8",

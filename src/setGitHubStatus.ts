@@ -1,33 +1,28 @@
-let GitHubApi = require("github");
-import bluebird = require("bluebird");
+import {ISetGitHubStatus, IGitHubAPI} from "./types";
+import TYPES from "./types";
+import {injectable, inject} from "inversify";
 
-export default function setGitHubStatus(user: String, repo: String, revision: String, context: String, state: String, description: String, url: String) {
-    let gitHub = new GitHubApi({
-        Promise: bluebird,
-        debug: true,
-        followRedirects: false,
-        headers: {
-            "user-agent": "Classfitter",
-        },
-        host: "api.github.com",
-        protocol: "https",
-        timeout: 5000,
-    });
-    gitHub.authenticate({
-        token: process.env.GITHUB_TOKEN,
-        type: "token",
-    });
-    if (description.length > 140) {
-        description = description.slice(0, 140)
+let statuses: Array<string> = ["pending", "success", "failure", "error"];
+
+@injectable()
+class SetGitHubStatus implements ISetGitHubStatus {
+    private _myAPI: IGitHubAPI;
+    public constructor(@inject(TYPES.iGitHubAPI) myAPI: IGitHubAPI){
+        this._myAPI = myAPI;
     }
-
-    return gitHub.repos.createStatus({
+    public execute(user: string, repo: string, commit: string, context: string, state: string, description: string, url: string) {
+        if (statuses.indexOf(state)<0) {
+            throw new Error("Invalid State: " + state);
+        }
+        return this._myAPI.repos.createStatus({
         user: user,
         repo: repo,
-        sha: revision,
+        sha: commit,
         state: state,
         context: context,
         description: description,
         target_url: url,
     });
+    }
 }
+export default SetGitHubStatus;
