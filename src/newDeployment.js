@@ -45,6 +45,4 @@ return github.repos.createDeployment({
 		ref:branchName
 	});
 }).catch(function(error){
-	console.log("There was an error");
-	console.dir(error);
 }).done()

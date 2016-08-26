@@ -10,6 +10,10 @@
     "xpath": "registry:dt/xpath#0.0.7+20160316155526"
   },
   "dependencies": {
-    "bluebird": "registry:npm/bluebird#3.4.1+20160811213708"
+    "bluebird": "registry:npm/bluebird#3.4.1+20160811213708",
+    "semver": "registry:npm/semver#5.0.0+20160723033700"
+  },
+  "globalDevDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504"
   }
 }

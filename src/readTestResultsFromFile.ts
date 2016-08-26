@@ -2,6 +2,8 @@ import * as interfaces from "./types";
 import TYPES from "./types";
 import {injectable, inject} from "inversify";
 
+import {required, validate, defined} from "./validation";
+
 import xpath = require("xpath");
 import xmlDom = require("xmldom");
 let parser = xmlDom.DOMParser;
@@ -17,8 +19,9 @@ function readFileAsync(filename: String): Promise<any> {
 }
 
 @injectable()
-class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile{
-    public execute(path: String) {
+class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile {
+    @defined
+    public execute(path: String): Promise<interfaces.ITestResult> {
         let unitTestResult: String;
         let unitTestDescription: String;
         return readFileAsync(path).then(function (fileData) {
@@ -35,8 +38,6 @@ class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile{
                 unitTestResult = "success";
             }
         }).catch(function (err) {
-            console.log("error reading results");
-            console.error(err);
             unitTestDescription = "error reading results: " + err.message;
             unitTestResult = "error";
         }).then(function () {
@@ -48,4 +49,4 @@ class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile{
     }
 }
 
-
+export default ReadTestResultsFromFile;

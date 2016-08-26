@@ -9,12 +9,12 @@ import SetGitHubStatus from "../SetGitHubStatus";
 declare var done;
 import { Kernel, interfaces } from "inversify";
 
-var kernel = new Kernel();
+
 
 import {ISetGitHubStatus, IGitHubAPI} from "../types";
 import TYPES from "../types";
 
-kernel.bind<ISetGitHubStatus>(TYPES.iSetGitHubStatus).to(SetGitHubStatus);
+
 
 let USER = "user";
 let REPO = "repo";
@@ -25,6 +25,16 @@ let DESCRIPTION = "description";
 let URL= "URL";
 
 describe("SetGitHubStatus", function () {
+    let kernel = new Kernel();
+
+    beforeEach(function(){
+        kernel.bind<ISetGitHubStatus>(
+            TYPES.iSetGitHubStatus).to(SetGitHubStatus);
+    })
+    afterEach(function(){
+        kernel.unbindAll();
+    });
+
     it("Should pass correct arguments", function () {
         let called: Boolean = false;
         let myFakeAPI = {

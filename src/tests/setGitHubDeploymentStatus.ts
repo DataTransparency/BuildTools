@@ -7,14 +7,14 @@ let fs = require("fs");
 
 import SetGitHubDeploymentStatus from "../SetGitHubDeploymentStatus";
 declare var done;
-import { Kernel, interfaces } from "inversify";
+import {Kernel} from "inversify";
 
-var kernel = new Kernel();
 
-import {ISetGitHubDeploymentStatus, IGitHubAPI} from "../types";
+
+import * as interfaces from "../types";
 import TYPES from "../types";
 
-kernel.bind<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus).to(SetGitHubDeploymentStatus);
+
 
 let USER = "user";
 let REPO = "repo";
@@ -23,6 +23,15 @@ let STATE = "pending";
 let DESCRIPTION = "description";
 
 describe("SetGitHubDeploymentStatus", function () {
+    let kernel = new Kernel();
+    beforeEach(function(){
+        kernel.bind<interfaces.ISetGitHubDeploymentStatus>(
+        TYPES.iSetGitHubDeploymentStatus).to(SetGitHubDeploymentStatus);
+    })
+    afterEach(function(){
+        kernel.unbindAll();
+    });
+
     it("Should pass correct arguments", function () {
         let called: Boolean = false;
         let myFakeAPI = {
@@ -42,12 +51,10 @@ describe("SetGitHubDeploymentStatus", function () {
                 }
             }
         }
-        kernel.bind<IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
-        let setGitHubDeploymentStatus = kernel.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
+        kernel.bind<interfaces.IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
+        let setGitHubDeploymentStatus = kernel.get<interfaces.ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
         return setGitHubDeploymentStatus.execute(USER, REPO, ID, STATE, DESCRIPTION).then(function () {
             assert.equal(called, true);
-        }).then(function () {
-            kernel.unbind(TYPES.iGitHubAPI);
         })
     });
 
@@ -59,12 +66,11 @@ describe("SetGitHubDeploymentStatus", function () {
             },
         };
 
-        kernel.bind<IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
-        let setGitHubDeploymentStatus = kernel.get<ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
+        kernel.bind<interfaces.IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
+        let setGitHubDeploymentStatus = kernel.get<interfaces.ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
         assert.throws(function () {
             setGitHubDeploymentStatus.execute(USER, REPO, ID, "rubish", DESCRIPTION);
         });
-        kernel.unbind(TYPES.iGitHubAPI);
         done();
     });
 })

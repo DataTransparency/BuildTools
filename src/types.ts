@@ -10,12 +10,17 @@ export interface ITestResult {
     result: string,
     description: string,
 }
+
+export interface IGetVersionFromPayload{
+    execute(payloadPath: String): Promise<string>;
+}
+
 export interface IReadTestResultsFromFile{
     execute(path: String): Promise<ITestResult>;
 }
 
-export interface ISetGitHubDeploymentStatusWthPayload{
-    execute(payloadstring: string, state: string, description: string)
+export interface ISetGitHubDeploymentStatusWithPayload{
+    execute(payloadPath: string, state: string, description: string)
 }
 export interface ISetGitHubDeploymentStatus{
     execute(user: string, repo: string, deploymentId: number, state: string, description: string)
@@ -30,10 +35,11 @@ export interface ISetGitHubStatusFromTestResutsFile{
 let TYPES = {
     iGitHubAPI: Symbol("IGitHubAPI"),
     iSetGitHubDeploymentStatus: Symbol("ISetGitHubDeploymentStatus"),
-    iSetGitHubDeploymentStatusWthPayload: Symbol("ISetGitHubDeploymentStatusWthPayload"),
+    iSetGitHubDeploymentStatusWithPayload: Symbol("ISetGitHubDeploymentStatusWthPayload"),
     iSetGitHubStatus: Symbol("ISetGitHubStatus"),
     iSetGitHubStatusFromTestResutsFile: Symbol("ISetGitHubStatusFromTestResutsFile"),
     iReadTestResultsFromFile: Symbol("IReadTestResultsFromFile"),
+    iGetVersionFromPayload: Symbol("IGetVersionFromPayload"),
 }
 
 export default TYPES;
