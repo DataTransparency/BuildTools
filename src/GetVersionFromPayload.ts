@@ -10,8 +10,6 @@ let parser = xmlDom.DOMParser;
 let fs = require("fs");
 import  * as semver from "semver";
 
-
-
 function readFileAsync(filename: String): Promise<any> {
     return new Promise((resolve, reject) => {
         fs.readFile(filename, "ascii", (err, result) => {

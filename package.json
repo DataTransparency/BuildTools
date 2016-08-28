@@ -1,6 +1,6 @@
 {
   "name": "classfitter-tools",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Tools for managing classfitter",
   "main": "lib/index.js",
   "bin": {

@@ -21,21 +21,24 @@ function readFileAsync(filename: String): Promise<any> {
 @injectable()
 class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile {
     @defined
-    public execute(path: String): Promise<interfaces.ITestResult> {
-        let unitTestResult: String;
-        let unitTestDescription: String;
+    public execute(path: string): Promise<interfaces.ITestResult> {
+        let unitTestResult: string;
+        let unitTestDescription: string;
         return readFileAsync(path).then(function (fileData) {
             let doc = new parser().parseFromString(fileData.substring(2, fileData.length));
-            let getInt = function (xpathCommand: String) {
+            let getInt = function (xpathCommand: string) {
                 return parseInt(xpath.select("string(" + xpathCommand + ")", doc).toString(), null);
             };
             let testFails = getInt("/testsuite/@failures");
+            let testErrors = getInt("/testsuite/@errors");
             let testTotal = getInt("/testsuite/@tests");
-            unitTestDescription = testTotal - testFails + "/" + testTotal;
-            if (testFails >= testTotal) {
-                unitTestResult = "failure";
-            } else {
+            let testPassed = testTotal - testFails - testErrors;
+
+            unitTestDescription = testPassed + "/" + testTotal;
+            if (testPassed === testTotal) {
                 unitTestResult = "success";
+            } else {
+                unitTestResult = "failure";
             }
         }).catch(function (err) {
             unitTestDescription = "error reading results: " + err.message;

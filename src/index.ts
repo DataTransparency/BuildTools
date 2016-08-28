@@ -23,4 +23,8 @@ let newArgs = process.argv.slice(3);
 let command = process.argv[2];
 me[command].execute.apply(me[command], newArgs).then(function(result){
     process.stdout.write(result);
-});
+    return 1;
+}).catch(function(error){
+    console.error(error);
+    return 0;
+})

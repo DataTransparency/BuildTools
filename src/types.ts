@@ -11,6 +11,7 @@ export interface ITestResult {
     description: string,
 }
 
+
 export interface IGetVersionFromPayload{
     execute(payloadPath: String): Promise<string>;
 }

@@ -1,0 +1,40 @@
+import assert = require("assert");
+import mocha = require("mocha");
+let fs = require("fs");
+
+/// <reference path="node_modules/inversify-dts/inversify/inversify.d.ts" />
+
+
+import ReadTestResultsFromFile from "../ReadTestResultsFromFile";
+declare var done;
+import {Kernel} from "inversify";
+import * as interfaces from "../types";
+import TYPES from "../types";
+
+
+describe("ReadTestResultsFromFile", function () {
+    let kernel = new Kernel();
+    beforeEach(function(){
+        kernel.bind<interfaces.IReadTestResultsFromFile>(
+        TYPES.iReadTestResultsFromFile).to(ReadTestResultsFromFile);
+    })
+    afterEach(function(){
+        kernel.unbindAll();
+    });
+
+    it("Should report failure if any tests fail", function () {
+        let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
+        return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSTests.xml").then(function(results){
+            assert.equal(results.description, "2/4");
+            assert.equal(results.result, "failure");
+        })
+    });
+
+     it("Should report succes otherwise", function () {
+        let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
+        return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSUITests.xml").then(function(results){
+            assert.equal(results.description, "1/1");
+            assert.equal(results.result, "success");
+        })
+    });
+})
