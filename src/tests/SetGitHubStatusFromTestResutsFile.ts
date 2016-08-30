@@ -22,7 +22,7 @@ describe("SetGitHubStatusFromTestResutsFile", function () {
         kernel.unbindAll();
     });
 
-
+   
     it("Should call read ReadResultsFromFile and SetGitHubStatus", function () {
         let user ="user"; 
         let repo ="repo";

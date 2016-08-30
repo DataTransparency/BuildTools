@@ -37,12 +37,11 @@ class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile {
             unitTestDescription = testPassed + "/" + testTotal;
             if (testPassed === testTotal) {
                 unitTestResult = "success";
-            } else {
+            } else if (testErrors === 0) {
                 unitTestResult = "failure";
+            } else {
+                unitTestResult = "error";
             }
-        }).catch(function (err) {
-            unitTestDescription = "error reading results: " + err.message;
-            unitTestResult = "error";
         }).then(function () {
             return {
                 result: unitTestResult,

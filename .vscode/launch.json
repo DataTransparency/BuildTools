@@ -2,12 +2,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Run mocha",
+            "type": "node",
+            "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
+            "stopOnEntry": false,
+            "args": ["-t", "10000","--debug-brk", "${workspaceRoot}/lib/tests/index.js"],
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": "/Users/jamesjwood/.nvm/versions/node/v6.4.0/bin/node",
+            "env": { "NODE_ENV": "development"},
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "sourceMaps": false
+        },
+        {
             "name": "Test",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
-            "args": ["${workspaceRoot}/lib/tests/index.js"],
+            "args": ["${workspaceRoot}/lib/tests/index.js", "--debug-brk"],
             "stopOnEntry": false,
+            "address": "localhost",
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "",
             "runtimeExecutable": null,
@@ -29,7 +44,7 @@
             "stopOnEntry": false,
             "args": ["getVersionFromPayload","${workspaceRoot}/src/tests/deploymentPayload.json"],
             "cwd": "${workspaceRoot}",
-            "preLaunchTask": "",
+            "preLaunchTask": "tsc",
             "runtimeExecutable": null,
             "runtimeArgs": [
                 "--nolazy"

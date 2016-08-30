@@ -24,11 +24,14 @@ let DESCRIPTION = "description";
 
 describe("SetGitHubDeploymentStatus", function () {
     let kernel = new Kernel();
+    let OLD_VALUE = process.env.NODE_ENV;
     beforeEach(function(){
+        process.env.NODE_ENV = "production";
         kernel.bind<interfaces.ISetGitHubDeploymentStatus>(
         TYPES.iSetGitHubDeploymentStatus).to(SetGitHubDeploymentStatus);
     })
     afterEach(function(){
+        process.env.NODE_ENV = OLD_VALUE;
         kernel.unbindAll();
     });
 
@@ -72,5 +75,28 @@ describe("SetGitHubDeploymentStatus", function () {
             setGitHubDeploymentStatus.execute(USER, REPO, ID, "rubish", DESCRIPTION);
         });
         done();
+    });
+
+     it("Should not call when environment is development", function () {
+        let called: Boolean = false;
+        let myFakeAPI = {
+            "repos": {
+                "createStatus": function(requestArg){},
+                "createDeploymentStatus": function (requestArg) {
+                    called = true;
+                    let p = new Promise<string>(function (resolve, reject) {
+                        process.nextTick(resolve);
+                    })
+                    return p;
+                }
+            }
+        }
+        process.env.NODE_ENV = "development";
+        kernel.bind<interfaces.IGitHubAPI>(TYPES.iGitHubAPI).toConstantValue(myFakeAPI);
+        let setGitHubDeploymentStatus = kernel.get<interfaces.ISetGitHubDeploymentStatus>(TYPES.iSetGitHubDeploymentStatus);
+        return setGitHubDeploymentStatus.execute(USER, REPO, ID, STATE, DESCRIPTION).then(function (returnedValue) {
+            assert.equal(called, false);
+            assert.equal(returnedValue.toString(), "Would have set deployment status to pending");
+        })
     });
 })

@@ -22,11 +22,11 @@ describe("ReadTestResultsFromFile", function () {
         kernel.unbindAll();
     });
 
-    it("Should report failure if any tests fail", function () {
+    it("Should report error if there are any errors", function () {
         let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
         return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSTests.xml").then(function(results){
             assert.equal(results.description, "2/4");
-            assert.equal(results.result, "failure");
+            assert.equal(results.result, "error");
         })
     });
 
@@ -35,6 +35,21 @@ describe("ReadTestResultsFromFile", function () {
         return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSUITests.xml").then(function(results){
             assert.equal(results.description, "1/1");
             assert.equal(results.result, "success");
+        })
+    });
+
+     it("It should error if there is no file", function () {
+        var ranThen = false;
+        var threwError = false;
+        let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
+        return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSUITestwerewr.xml").then(function(results){
+               ranThen=true;
+        }).catch(function(error){
+            threwError = true;
+        })
+        .then(function(){
+            assert.equal(ranThen, false);
+            assert.equal(threwError, true);
         })
     });
 })
