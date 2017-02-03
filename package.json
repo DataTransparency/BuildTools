@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
     "install": "node node_modules/typings/dist/bin.js install && node node_modules/typescript/bin/tsc",
-    "test": "node_modules/typescript/bin/tsc && node_modules/mocha/bin/mocha lib/tests/index.js"
+    "test": "node node_modules/typescript/bin/tsc && node node_modules/mocha/bin/mocha lib/tests/index.js"
   },
   "author": "James Wood",
   "license": "ISC",
