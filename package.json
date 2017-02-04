@@ -4,7 +4,6 @@
   "description": "Tools for managing building on Jenkins",
   "main": "lib/index.js",
   "bin": {
-    "cftool": "lib/index.js"
   },
   "scripts": {
     "lint": "tslint 'src/**/*.ts'",
