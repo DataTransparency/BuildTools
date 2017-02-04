@@ -39,8 +39,8 @@ describe("ReadTestResultsFromFile", function () {
     });
 
      it("It should error if there is no file", function () {
-        var ranThen = false;
-        var threwError = false;
+        let ranThen = false;
+        let threwError = false;
         let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
         return readTestResultsFromFile.execute("src/tests/TEST-ClassfitteriOSUITestwerewr.xml").then(function(results){
                ranThen=true;
@@ -50,6 +50,14 @@ describe("ReadTestResultsFromFile", function () {
         .then(function(){
             assert.equal(ranThen, false);
             assert.equal(threwError, true);
+        });
+    });
+
+    it("Should work with testsuites element", function () {
+        let readTestResultsFromFile = kernel.get<interfaces.IReadTestResultsFromFile>(TYPES.iReadTestResultsFromFile);
+        return readTestResultsFromFile.execute("src/tests/MSResults.xml").then(function(results){
+            assert.equal(results.description, "8/8");
+            assert.equal(results.result, "success");
         })
     });
 })

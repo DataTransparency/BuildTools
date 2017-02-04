@@ -29,9 +29,16 @@ class ReadTestResultsFromFile implements interfaces.IReadTestResultsFromFile {
             let getInt = function (xpathCommand: string) {
                 return parseInt(xpath.select("string(" + xpathCommand + ")", doc).toString(), null);
             };
-            let testFails = getInt("/testsuite/@failures");
-            let testErrors = getInt("/testsuite/@errors");
-            let testTotal = getInt("/testsuite/@tests");
+            let xmlPath = "/testsuite/";
+            let testTotal = getInt(xmlPath + "@tests");
+
+            if (isNaN(testTotal)) {
+                xmlPath = "/testsuites" + xmlPath;
+            }
+
+            testTotal = getInt(xmlPath + "@tests");
+            let testFails = getInt(xmlPath + "@failures");
+            let testErrors = getInt(xmlPath + "@errors");
             let testPassed = testTotal - testFails - testErrors;
 
             unitTestDescription = testPassed + "/" + testTotal;
