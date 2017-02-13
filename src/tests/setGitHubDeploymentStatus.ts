@@ -39,6 +39,7 @@ describe("SetGitHubDeploymentStatus", function () {
         let called: Boolean = false;
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function(requestArg){},
                 "createDeploymentStatus": function (requestArg) {
                     assert.equal(requestArg.user, USER);
@@ -64,6 +65,7 @@ describe("SetGitHubDeploymentStatus", function () {
     it("Should reject invalid statuses", function (done) {
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function(requestArg){},
                 "createDeploymentStatus": function (requestArg) {}
             },
@@ -81,6 +83,7 @@ describe("SetGitHubDeploymentStatus", function () {
         let called: Boolean = false;
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function(requestArg){},
                 "createDeploymentStatus": function (requestArg) {
                     called = true;

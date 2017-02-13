@@ -9,6 +9,7 @@ import SetGitHubStatus from "./SetGitHubStatus";
 import SetGitHubStatusFromTestResutsFile from "./SetGitHubStatusFromTestResutsFile";
 import ReadTestResultsFromFile from "./ReadTestResultsFromFile";
 import GetVersionFromPayload from "./GetVersionFromPayload";
+import CreateGitHubDeployment from "./CreateGitHubDeployment";
 
 let GitHubApi = require("github");
 
@@ -45,4 +46,6 @@ kernel.bind<interfaces.ISetGitHubStatusFromTestResutsFile>(
     TYPES.iSetGitHubStatusFromTestResutsFile).to(SetGitHubStatusFromTestResutsFile);
 kernel.bind<interfaces.IGetVersionFromPayload>(
     TYPES.iGetVersionFromPayload).to(GetVersionFromPayload);
+kernel.bind<interfaces.ICreateGitHubDeployment>(
+    TYPES.iCreateGitHubDeployment).to(CreateGitHubDeployment);
 export default kernel;

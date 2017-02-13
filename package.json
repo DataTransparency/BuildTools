@@ -1,6 +1,6 @@
 {
   "name": "classfitter-tools",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Tools for managing building on Jenkins",
   "main": "lib/index.js",
   "bin": {},
@@ -14,7 +14,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.52",
     "assert": "^1.4.1",
-    "github": "^2.5.1",
+    "github": "8.2.1",
     "inversify": "^2.0.0-rc.11",
     "inversify-dts": "^2.1.0",
     "mocha": "^3.0.2",

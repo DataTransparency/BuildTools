@@ -1,6 +1,7 @@
 export interface IRepos{
     createDeploymentStatus: (any);
-    createStatus:(any);
+    createDeployment: (any);
+    createStatus: (any);
 }
 export interface IGitHubAPI{
     repos: IRepos;
@@ -33,15 +34,20 @@ export interface ISetGitHubStatusFromTestResutsFile{
     execute(user: String, repo: String, revision: String, fileName: String, context: String, url: String)
 }
 
+export interface ICreateGitHubDeployment{
+    execute(user: string, repo: string, ref: string, environment: string, versionIncrement: string, required_contexts: string);
+}
+
 let TYPES = {
+    iCreateGitHubDeployment: Symbol("ICreateGitHubDeployment"),
+    iGetVersionFromPayload: Symbol("IGetVersionFromPayload"),
     iGitHubAPI: Symbol("IGitHubAPI"),
+    iReadTestResultsFromFile: Symbol("IReadTestResultsFromFile"),
     iSetGitHubDeploymentStatus: Symbol("ISetGitHubDeploymentStatus"),
     iSetGitHubDeploymentStatusWithPayload: Symbol("ISetGitHubDeploymentStatusWthPayload"),
     iSetGitHubStatus: Symbol("ISetGitHubStatus"),
     iSetGitHubStatusFromTestResutsFile: Symbol("ISetGitHubStatusFromTestResutsFile"),
-    iReadTestResultsFromFile: Symbol("IReadTestResultsFromFile"),
-    iGetVersionFromPayload: Symbol("IGetVersionFromPayload"),
-}
+};
 
 export default TYPES;
 

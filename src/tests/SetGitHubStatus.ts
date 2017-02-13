@@ -45,6 +45,7 @@ describe("SetGitHubStatus", function () {
 
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function (requestArg) {
                     assert.equal(requestArg.user, USER);
                     assert.equal(requestArg.repo, REPO);
@@ -87,6 +88,7 @@ describe("SetGitHubStatus", function () {
 
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function (requestArg) {
                     PASSED_DESCRIPTION = requestArg.description;
                     called = true;
@@ -121,6 +123,7 @@ describe("SetGitHubStatus", function () {
         let URL = "URL";
         let myFakeAPI = {
             "repos": {
+                "createDeployment": function(requestArg){},
                 "createStatus": function (requestArg) {
                     called = true;
                     let p = new Promise<string>(function (resolve, reject) {

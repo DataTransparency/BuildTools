@@ -16,7 +16,9 @@ let me = {
     "setGitHubStatusFromTestResutsFile": k.get<interfaces.ISetGitHubStatusFromTestResutsFile>(
         TYPES.iSetGitHubStatusFromTestResutsFile),
     "getVersionFromPayload": k.get<interfaces.IGetVersionFromPayload>(
-        TYPES.iGetVersionFromPayload),
+        TYPES.iGetVersionFromPayload),   
+    "createGitHubDeployment": k.get<interfaces.ICreateGitHubDeployment>(
+        TYPES.iCreateGitHubDeployment),
 };
 
 let newArgs = process.argv.slice(3);
