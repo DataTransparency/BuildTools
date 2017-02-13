@@ -40,6 +40,7 @@ jspm_packages
 lib
 bin
 typings
+.vscode/
 .vscode/.browse.VC.db
 
 .vscode/.browse.VC.db
